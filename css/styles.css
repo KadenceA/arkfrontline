@@ -102,7 +102,7 @@ em {
 }
 .lead {
   color: var(--muted);
-  font-size: 1.15rem;
+  /* font-size: 1.15rem; */
   max-width: 720px;
 }
 
@@ -1875,6 +1875,7 @@ body > footer .brand img {
   grid-template-columns: 1fr auto;
   gap: 32px 48px;
   align-items: start;
+  padding-bottom: 24px;
 }
 .f-brand {
   display: grid;
@@ -2331,4 +2332,59 @@ body > footer small {
   .tst-card {
     transition: none;
   }
+}
+
+/* ===== Footer phone: green "available" pill ===== */
+.f-tel{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:7px 16px 7px 12px;
+  border-radius:999px;
+  background:rgba(52,211,153,.1);
+  border:1px solid rgba(52,211,153,.45);
+  color:#d1fae5;
+  font-weight:600;
+  font-size:.92rem;
+  transition:background-color .25s, border-color .25s, box-shadow .25s, transform .25s, color .25s;
+}
+.f-tel:hover{
+  background:rgba(52,211,153,.18);
+  border-color:rgba(52,211,153,.8);
+  color:#ecfdf5;
+  box-shadow:0 8px 22px rgba(52,211,153,.2);
+  transform:translateY(-1px);
+}
+.f-tel:focus-visible{
+  outline:2px solid #34d399;
+  outline-offset:3px;
+}
+
+.f-tel-dot{
+  position:relative;
+  flex:none;
+  width:9px;height:9px;border-radius:50%;
+  background:#34d399;
+  box-shadow:0 0 0 3px rgba(52,211,153,.22);
+}
+.f-tel-dot::after{
+  content:"";
+  position:absolute;inset:0;
+  border-radius:50%;
+  background:#34d399;
+  animation:fTelPulse 2s ease-out infinite;
+}
+@keyframes fTelPulse{
+  0%{ transform:scale(1); opacity:.6; }
+  70%{ transform:scale(2.6); opacity:0; }
+  100%{ opacity:0; }
+}
+@media (prefers-reduced-motion:reduce){
+  .f-tel-dot::after{ animation:none; }
+}
+
+/* keep the email link unstyled next to it */
+.f-contact{gap:10px 20px;align-items:center}
+@media (max-width:700px){
+  .f-tel{padding:7px 14px 7px 11px;font-size:.88rem}
 }
