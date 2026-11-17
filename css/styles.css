@@ -1242,7 +1242,7 @@ section.pad {
   justify-content: center;
 }
 .team-card {
-  padding: 26px 24px 28px;
+  padding: 24px 24px 24px;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid var(--line);
@@ -1469,14 +1469,18 @@ form .btn {
 #sent {
   margin-top: 18px;
   min-height: 1em;
-  font-size: .92rem;
+  font-size: 0.92rem;
   line-height: 1.5;
   text-align: center;
   border-radius: 14px;
   padding: 0;
   border: 1px solid transparent;
   background: transparent;
-  transition: background-color .3s, border-color .3s, color .3s, padding .3s;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    color 0.3s,
+    padding 0.3s;
 }
 
 /* success state — becomes a visible green container */
@@ -1491,15 +1495,14 @@ form .btn {
 #sent.is-error {
   padding: 14px 18px;
   color: #b91c1c;
-  background: rgba(239, 68, 68, .08);
-  border-color: rgba(239, 68, 68, .35);
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.35);
 }
 
 /* "Sending…" state — neutral, no container, just muted text */
 #sent.is-sending {
   color: var(--muted);
 }
-
 
 input.bad,
 select.bad {
@@ -1625,8 +1628,13 @@ select.bad {
   transform: none;
 }
 .bg-veil {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(253,252,250,.35), rgba(253,252,250,.65));
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(253, 252, 250, 0.35),
+    rgba(253, 252, 250, 0.65)
+  );
   /* ← was rgba(247,248,251,.35) / rgba(247,248,251,.65) */
 }
 
@@ -2196,7 +2204,9 @@ body > footer small {
     grid-template-columns: 1fr;
   }
   .team-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: center; gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: center;
+    gap: 16px;
   }
   .f-top {
     grid-template-columns: 1fr;
@@ -2425,3 +2435,62 @@ body > footer small {
     transition: none;
   }
 }
+
+/* ===== Team card: LinkedIn pill ===== */
+.team-linkedin {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 14px 10px 14px;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  /* border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); */
+  transition: background-color .25s, border-color .25s, color .25s, transform .25s, box-shadow .25s;
+}
+.team-linkedin:hover {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  color: var(--accent-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.team-linkedin:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* left group: icon + word, perfectly centred on one axis */
+.team-linkedin .label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1;
+}
+.team-linkedin .label svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  display: block;   /* kills the inline-svg baseline gap */
+}
+
+/* right side: arrow, pushed flush right */
+.team-linkedin .arrow {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  margin-left: auto;
+  font-weight: 200;
+  font-size: 0.55rem;
+}
+.team-linkedin .arrow svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+  transition: transform .25s;
+}
+.team-linkedin:hover .arrow svg { transform: translateX(3px); }
