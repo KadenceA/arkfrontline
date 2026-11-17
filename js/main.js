@@ -55,22 +55,52 @@ if (nav) {
   const formEl = document.getElementById("f");
   if (!formEl) return; // ← guard: #f only exists on contact.html
 
-  formEl.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const ind = e.target.industry;
-    if (!ind.value) {
-      ind.classList.add("bad");
-      ind.focus();
-      return;
+  formEl.addEventListener('submit', async e => {
+  e.preventDefault();
+  const ind = e.target.industry;
+  if (!ind.value) { ind.classList.add('bad'); ind.focus(); return; }
+
+  const sent = document.getElementById('sent');
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.disabled = true;
+
+  // clear any previous state
+  sent.className = '';
+  sent.classList.add('is-sending');
+  sent.textContent = 'Sending…';
+
+  const data = new FormData(e.target);
+  // Optional: formsubmit.app supports a time-based spam check[citation:2][citation:4]
+  data.set('_ts', String(Date.now()));
+
+  try {
+    // IMPORTANT: Use your form's action attribute or the full endpoint URL
+    const res = await fetch(e.target.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    const json = await res.json();
+
+    // formsubmit.app uses json.ok to signal success[citation:2]
+    if (json.ok) {
+      sent.classList.remove('is-sending');
+      sent.classList.add('is-success');
+      sent.textContent = "Thanks! Your request has been sent. We'll reply within 24 hours.";
+      e.target.reset();
+      // optional: reset the two-step UI back to step 1 here
+    } else {
+      // json.error.message contains the human-readable error[citation:2]
+      throw new Error(json.error?.message || 'Submission failed');
     }
-    const d = Object.fromEntries(new FormData(e.target));
-    const body = `Name: ${d.name}\nCompany: ${d.company}\nEmail: ${d.email}\nIndustry: ${d.industry}\n\n${d.needs}`;
-    location.href = `mailto:hello@arkfrontline.com?subject=${encodeURIComponent("Free Audit Request - " + d.company)}&body=${encodeURIComponent(body)}`;
-    const sent = document.getElementById("sent");
-    if (sent)
-      sent.textContent =
-        "Thanks! Your email app should open with your request ready to send.";
-  });
+  } catch (err) {
+    sent.classList.remove('is-sending');
+    sent.classList.add('is-error');
+    sent.textContent = err.message || 'Something went wrong. Please email hello@arkfrontline.com directly.';
+  } finally {
+    btn.disabled = false;
+  }
+});
 
   /* two-step form */
   const panes = [...formEl.querySelectorAll(".fpane")];

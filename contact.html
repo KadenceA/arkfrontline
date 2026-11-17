@@ -40,6 +40,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
+    <style>html{background:#f8f5fb}</style>
   </head>
   <body>
     <div class="bg-media" aria-hidden="true">
@@ -185,7 +186,8 @@
               </li>
             </ul>
           </div>
-          <form id="f" class="rv" novalidate>
+          <form id="f" class="rv" novalidate action="https://formsubmit.app/f/wn6j7368xc" method="POST">
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
             <h3>Request a Free Audit</h3>
             <p>Two short steps. Under a minute.</p>
             <div class="fsteps" id="fsteps">
@@ -193,6 +195,7 @@
               ><span><b>2</b> Your needs</span>
             </div>
             <div class="fpane on" data-p="1">
+              
               <label
                 >Full Name *<input name="name" required autocomplete="name"
               /></label>
@@ -228,7 +231,7 @@
               <label
                 >Anything we should know?
                 <small>(optional: channels, volume, hours)</small>
-                <textarea name="needs" rows="3"></textarea>
+                <textarea name="message" rows="3"></textarea>
               </label>
               <div class="fbtns">
                 <button class="btn btn-ghost" type="button" id="fback">
@@ -239,7 +242,7 @@
               </div>
             </div>
             <p class="fine">We reply within 24 hours. No spam.</p>
-            <p id="sent" role="status" aria-live="polite"></p>
+            <div id="sent" role="status" aria-live="polite"></div>
             <p class="fine">
               By submitting this form, you agree to our
               <a
@@ -396,7 +399,7 @@
           <small>© 2026 ARK Frontline. All rights reserved.</small>
           <div class="row">
             <a href="privacy.html" style="font-size: small">Privacy Policy</a>
-            <a href="terms.html" style="font-size: small">Terms & Conditions</a>
+            <a href="terms.html" style="font-size: small">Terms of Service</a>
           </div>
         </div>
       </div>
