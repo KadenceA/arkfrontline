@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arkfrontline.com/sitemap.xml
